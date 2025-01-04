@@ -1,0 +1,65 @@
+<div id="main-div">
+    <form class="container">
+        <div class="form-group row m-1">
+            <div class="col-3">
+                <label for="exampleInputEmail1">Name</label>
+            </div>
+            <div class="col-8">
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" id="name"
+                    [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group row m-1">
+            <div class="col-3">
+                <label for="exampleInputEmail1">Address</label>
+            </div>
+            <div class="col-8">
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Address"
+                    id="address" [(ngModel)]="address" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="form-group row m-1">
+            <div class="col-3">
+                <label for="exampleInputEmail1">Phone</label>
+            </div>
+            <div class="col-8">
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Phone"
+                    id="phone" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employeeData; index as i">
+                <td scope="row">{{i+1}}</td>
+                <td scope="row"><input type="text" class="form-control" aria-describedby="emailHelp"
+                        placeholder="Update Name" id="name" #nameInput value="{{employee.name}}"
+                        [readonly]="!isEditable"></td>
+                <td scope="row"><input type="text" class="form-control" aria-describedby="emailHelp"
+                        placeholder="Update Name" id="name" #addressInput value="{{employee.address}}"
+                        [readonly]="!isEditable"></td>
+                <td scope="row"><input type="text" class="form-control" aria-describedby="emailHelp"
+                        placeholder="Update Name" id="name" #phoneInput value="{{employee.phone}}"
+                        [readonly]="!isEditable"></td>
+                <td><button type="button" class="btn btn-danger" (click)="onDelete(employee._id)">Delete</button></td>
+                <td><button type="button" class="btn btn-warning" (click)="onEdit()">Edit</button></td>
+                <td><button type="button" class="btn btn-success"
+                        (click)="onUpdate(employee._id, nameInput.value, addressInput.value, phoneInput.value)">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
